@@ -1,0 +1,128 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.6'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.hibernate.orm' version '6.4.4.Final'
+	id 'org.graalvm.buildtools.native' version '0.9.28'
+	id 'com.google.cloud.tools.jib' version '3.4.2'
+  	id 'com.diffplug.spotless' version '6.25.0'
+	id 'jacoco'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+// https://blog.aisensiy.me/spotless-with-gradle-and-intellij/
+spotless {
+	java {
+		target project.fileTree(project.rootDir) {
+           include '**/*.java'
+           exclude 'build/generated/**/*.*', 'build/generated-examples/**/*.*'
+       }
+		importOrder()
+		removeUnusedImports()
+		googleJavaFormat()
+		trimTrailingWhitespace()
+        endWithNewline()
+	}
+}
+
+compileJava {
+    options.compilerArgs << '-parameters'
+}
+
+bootRun {
+    jvmArgs([
+        // "-Xms2048m",
+        // "-Xmx512m",
+		"-Dspring.profiles.active=developer"
+    ])
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+	implementation 'org.liquibase:liquibase-core'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+hibernate {
+	enhancement {
+		enableAssociationManagement = true
+	}
+}
+// https://github.com/GoogleContainerTools/jib/blob/master/jib-gradle-plugin/README.md
+jib {
+    from {
+        image = 'eclipse-temurin:17-jdk-alpine'
+		platforms {
+			platform {
+				architecture = 'amd64'
+      			os = 'linux'
+			}
+			// platform {
+      		// 	architecture = 'arm64'
+      		// 	os = 'linux'
+    		// }
+		}
+    }
+    to {
+        image = "registry.hub.docker.com/cch0124/${rootProject.name}"
+        tags = ['latest', project.version]
+    }
+    container {
+        appRoot = '/app'
+        jvmFlags = ['-Xms2048m', '-Xmx512m', "-Duser.timezone=UTC"]
+        ports = ['8080/tcp']
+        workingDirectory = '/app'
+		args = []
+		creationTime = Instant.now().toString()
+		format = com.google.cloud.tools.jib.api.buildplan.ImageFormat.OCI
+		labels = [
+			"maintainer": "Itachi",
+			"version": project.version
+		]
+    }
+    allowInsecureRegistries = false
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+	// default is reports/jacoco
+    reportsDirectory = layout.buildDirectory.dir("$buildDir/jacoco")
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("$buildDir/jacoco/html")
+    }
+}

@@ -1,0 +1,72 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - package
+  - deploy
+
+default:
+  tags:
+    - aws
+    - m4-large
+  image: gradle:alpine
+  before_script:
+    - export GRADLE_USER_HOME=$(pwd)/.gradle
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  script: gradle --build-cache assemble
+  cache:
+    key: $CI_COMMIT_REF_NAME
+    policy: push
+    paths:
+      - build
+      - .gradle
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      changes:
+        - "src/main/**/*"
+
+unit-test-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - sleep 60
+    - echo "Code coverage is 90%"
+
+lint-test-job:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+  script:
+    - gradle spotlessCheck
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      changes:
+        - "src/**/*"
+
+package image:
+  stage: package
+  script:
+    - |
+       gradle jib \
+        -Djib.to.image=${CI_REGISTRY_IMAGE} \
+        -Djib.to.auth.username=$CI_REGISTRY_USER \
+        -Djib.to.auth.password=$CI_REGISTRY_PASSWORD \
+        -Djib.to.tags=${CI_COMMIT_SHORT_SHA},latest
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+      - .gradle
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      changes:
+        - "src/**/*/*"
+    - when: manual
+      allow_failure: true
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."

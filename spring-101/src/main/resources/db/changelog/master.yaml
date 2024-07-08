@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: itachi
+      changes:
+        - sqlFile:
+            dbms: "postgresql"
+            encoding: utf8
+            path: classpath:/db/changelog/ddl/00001-changelog.sql
+            splitStatements: true
+            stripComments: true
+      comment: create tutorial table
