@@ -1,0 +1,22 @@
+@startuml
+
+interface IUserService{
+
+}
+
+class UserServiceImp implements IUserService {
+    - IUserDao userDaoImp = new UserDaoImp();
+}
+
+interface IUserDao{
+
+}
+
+class UserDaoImp implements IUserDao {
+    
+}
+
+
+UserServiceImp ..> IUserDao: Dependency
+
+@enduml
