@@ -5,7 +5,7 @@ interface IUserService{
 }
 
 class UserServiceImp implements IUserService {
-    - IUserDao userDaoImp = new UserDaoImp();
+    - IUserDao userDaoImp = new NewUserDaoImp();
 }
 
 interface IUserDao{
@@ -16,7 +16,11 @@ class UserDaoImp implements IUserDao {
     
 }
 
+class NewUserDaoImp implements IUserDao {
+    
+}
 
-UserServiceImp ..> UserDaoImp: Dependency
+
+UserServiceImp ..> NewUserDaoImp: Dependency
 
 @enduml
