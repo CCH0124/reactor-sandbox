@@ -1,0 +1,237 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 1065353216 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3600), pid=98444, tid=98564
+#
+# JRE version:  (21.0.3+7) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (21.0.3+7-LTS-jvmci-23.1-b37, mixed mode, sharing, tiered, jvmci, jvmci compiler, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -ea -Dvisualvm.display.name=spring-learning%PID -Dvisualvm.id=1720958761029 -XX:+ShowCodeDetailsInExceptionMessages -Dfile.encoding=UTF-8 org.eclipse.jdt.internal.junit.runner.RemoteTestRunner -version 3 -port 62602 -testLoaderClass org.eclipse.jdt.internal.junit5.runner.JUnit5TestLoader -loaderpluginname org.eclipse.jdt.junit5.runtime -test org.annotation.qualifier.QualifierTest:qualifier_test
+
+Host: AMD Ryzen 9 7950X3D 16-Core Processor          , 32 cores, 63G,  Windows 11 , 64 bit Build 22621 (10.0.22621.3672)
+Time: Sun Jul 14 20:06:04 2024  Windows 11 , 64 bit Build 22621 (10.0.22621.3672) elapsed time: 0.005359 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000017df517a970):  JavaThread "Unknown thread" [_thread_in_vm, id=98564, stack(0x0000007651500000,0x0000007651600000) (1024K)]
+
+Stack: [0x0000007651500000,0x0000007651600000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6cfcf9]
+V  [jvm.dll+0x859351]
+V  [jvm.dll+0x85b87e]
+V  [jvm.dll+0x85bf53]
+V  [jvm.dll+0x27d036]
+V  [jvm.dll+0x6cc495]
+V  [jvm.dll+0x6c101a]
+V  [jvm.dll+0x35080a]
+V  [jvm.dll+0x358466]
+V  [jvm.dll+0x3aab3e]
+V  [jvm.dll+0x3aade8]
+V  [jvm.dll+0x324c0c]
+V  [jvm.dll+0x32576b]
+V  [jvm.dll+0x8228a9]
+V  [jvm.dll+0x3b7a61]
+V  [jvm.dll+0x80bc98]
+V  [jvm.dll+0x44cabe]
+V  [jvm.dll+0x44e591]
+C  [jli.dll+0x52a3]
+C  [ucrtbase.dll+0x29333]
+C  [KERNEL32.DLL+0x1257d]
+C  [ntdll.dll+0x5af28]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffeaa24bb88, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+Total: 0
+
+Other Threads:
+  0x0000017df74ef9f0 WorkerThread "GC Thread#0"                     [id=98584, stack(0x0000007651600000,0x0000007651700000) (1024K)]
+  0x0000017dfc8f4730 ConcurrentGCThread "G1 Main Marker"            [id=98588, stack(0x0000007651700000,0x0000007651800000) (1024K)]
+  0x0000017df74fc800 WorkerThread "G1 Conc#0"                       [id=98592, stack(0x0000007651800000,0x0000007651900000) (1024K)]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffea99b7367]
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007ffeaa2bcec8] Heap_lock - owner thread: 0x0000017df517a970
+
+Heap address: 0x000000040c800000, size: 16184 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 64 size 144 Howl #buckets 8 coarsen threshold 14745 Howl Bitmap #cards 2048 size 272 coarsen threshold 1843 Card regions per heap region 1 cards per card region 16384
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x000000040c800000, 0x0000000800000000)
+  region size 8192K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffea9da7fa9]
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.003 Loaded shared library D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff7ee630000 - 0x00007ff7ee640000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\java.exe
+0x00007fff0c5d0000 - 0x00007fff0c7e7000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007fff0b860000 - 0x00007fff0b924000 	C:\Windows\System32\KERNEL32.DLL
+0x00007fff09b60000 - 0x00007fff09f0d000 	C:\Windows\System32\KERNELBASE.dll
+0x00007fff0a100000 - 0x00007fff0a211000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffee6f40000 - 0x00007ffee6f59000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\jli.dll
+0x00007ffee6ed0000 - 0x00007ffee6eeb000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\VCRUNTIME140.dll
+0x00007fff0c470000 - 0x00007fff0c522000 	C:\Windows\System32\ADVAPI32.dll
+0x00007fff0ab70000 - 0x00007fff0ac17000 	C:\Windows\System32\msvcrt.dll
+0x00007fff0a5c0000 - 0x00007fff0a669000 	C:\Windows\System32\sechost.dll
+0x00007fff09a70000 - 0x00007fff09a98000 	C:\Windows\System32\bcrypt.dll
+0x00007fff0c320000 - 0x00007fff0c434000 	C:\Windows\System32\RPCRT4.dll
+0x00007fff0c170000 - 0x00007fff0c31e000 	C:\Windows\System32\USER32.dll
+0x00007fff09fb0000 - 0x00007fff09fd6000 	C:\Windows\System32\win32u.dll
+0x00007ffefb8f0000 - 0x00007ffefbb83000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.3672_none_2713b9d173822955\COMCTL32.dll
+0x00007fff0c440000 - 0x00007fff0c469000 	C:\Windows\System32\GDI32.dll
+0x00007fff09fe0000 - 0x00007fff0a0f9000 	C:\Windows\System32\gdi32full.dll
+0x00007fff09f10000 - 0x00007fff09faa000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffefee80000 - 0x00007ffefee8a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007fff0c120000 - 0x00007fff0c151000 	C:\Windows\System32\IMM32.DLL
+0x00007ffeecd40000 - 0x00007ffeecd4c000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\vcruntime140_1.dll
+0x00007ffed8b00000 - 0x00007ffed8b8e000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\msvcp140.dll
+0x00007ffea9680000 - 0x00007ffeaa397000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\server\jvm.dll
+0x00007fff0a380000 - 0x00007fff0a3f1000 	C:\Windows\System32\WS2_32.dll
+0x00007fff08750000 - 0x00007fff0879d000 	C:\Windows\SYSTEM32\POWRPROF.dll
+0x00007ffefcc50000 - 0x00007ffefcc84000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007fff08730000 - 0x00007fff08743000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007fff089e0000 - 0x00007fff089f8000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffeecd10000 - 0x00007ffeecd1a000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\jimage.dll
+0x00007fff01160000 - 0x00007fff01392000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007fff0bd90000 - 0x00007fff0c118000 	C:\Windows\System32\combase.dll
+0x00007fff0aca0000 - 0x00007fff0ad77000 	C:\Windows\System32\OLEAUT32.dll
+0x00007ffefa2e0000 - 0x00007ffefa312000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007fff0a290000 - 0x00007fff0a30b000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffee6eb0000 - 0x00007ffee6ecf000 	D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.3672_none_2713b9d173822955;D:\java-sdk\graalvm-jdk-21\graalvm-jdk-21.0.3+7.1\bin\server
+
+VM Arguments:
+jvm_args: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -ea -Dvisualvm.display.name=spring-learning%PID -Dvisualvm.id=1720958761029 -XX:+ShowCodeDetailsInExceptionMessages -Dfile.encoding=UTF-8 
+java_command: org.eclipse.jdt.internal.junit.runner.RemoteTestRunner -version 3 -port 62602 -testLoaderClass org.eclipse.jdt.internal.junit5.runner.JUnit5TestLoader -loaderpluginname org.eclipse.jdt.junit5.runtime -test org.annotation.qualifier.QualifierTest:qualifier_test
+java_class_path (initial): d:\github\spring-sandbox\spring-learning\spring-annotation\build\resources\test;d:\github\spring-sandbox\spring-learning\spring-annotation\build\classes\java\test;d:\github\spring-sandbox\spring-learning\spring-annotation\build\resources\main;d:\github\spring-sandbox\spring-learning\spring-annotation\build\classes\java\main;\spring-annotation\bin;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.apache.tomcat.embed\tomcat-embed-el\10.1.25\2f030e4971e29245c10e58723fb6b364ce23933b\tomcat-embed-el-10.1.25.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.slf4j\jul-to-slf4j\2.0.13\a3bcd9d9dd50c71ce69f06b1fd05e40fdeff6ba5\jul-to-slf4j-2.0.13.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-expression\6.1.11\7c12cf1cd39289cfab7c5933eda9e4704a7f2799\spring-expression-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-context\6.1.11\8fc69f776333713aa26be8821af8c6355ccad8d8\spring-context-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-logging\3.3.1\2097eebccdf7556cf42c8a74a5da64420ac143a1\spring-boot-starter-logging-3.3.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\jakarta.annotation\jakarta.annotation-api\2.1.1\48b9bda22b091b1f48b13af03fe36db3be6e1ae3\jakarta.annotation-api-2.1.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-aop\6.1.11\3503ef99b759b81f8b0b3d5260bf4842e393a581\spring-aop-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-autoconfigure\3.3.1\36a6489e3ba5e34163bddb5134021de9ce101abc\spring-boot-autoconfigure-3.3.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.slf4j\slf4j-api\2.0.13\80229737f704b121a318bba5d5deacbcf395bc77\slf4j-api-2.0.13.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter\3.3.1\30e0ac13cfa51c77db60909ea28572a1e973f186\spring-boot-starter-3.3.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-beans\6.1.11\266176d132ab2bbf8e69e4aa6d7f47ec746ddc9a\spring-beans-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-observation\1.12.8\33e6ba3ca270e66b9c6145585f62f53f7e651fae\micrometer-observation-1.12.8.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.17.1\524dcbcccdde7d45a679dfc333e4763feb09079\jackson-databind-2.17.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.17.1\fca7ef6192c9ad05d07bc50da991bf937a84af3a\jackson-annotations-2.17.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-jcl\6.1.11\97b34c6b72c8084759e71cd09a7dad16bfb8f1da\spring-jcl-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\2.17.1\76b495194c36058904c82e288d285a1bd13f0ffa\jackson-datatype-jdk8-2.17.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-to-slf4j\2.23.1\425ad1eb8a39904d2830e907a324e956fb456520\log4j-to-slf4j-2.23.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\ch.qos.logback\logback-core\1.5.6\41cbe874701200c5624c19e0ab50d1b88dfcc77d\logback-core-1.5.6.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-tomcat\3.3.1\78bc3dedeb8abcea03f35d24f6779e0a3c6080d2\spring-boot-starter-tomcat-3.3.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.23.1\9c15c29c526d9c6783049c0a77722693c66706e1\log4j-api-2.23.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\3.3.1\2c5cfe68bc12646ce44663f865d39c747a28f2c7\spring-boot-3.3.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.module\jackson-module-parameter-names\2.17.1\74a998f6fbcedbddedf0a27e8ce72078b2e516a6\jackson-module-parameter-names-2.17.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-core\6.1.11\90fce4311852c68c1e87c65adf60db9add1a6dcb\spring-core-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.yaml\snakeyaml\2.2\3af797a25458550a16bf89acc8e4ab2b7f2bfce0\snakeyaml-2.2.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-web\3.3.1\ec812e82a010d089438b6ac98ebe294f2e540f71\spring-boot-starter-web-3.3.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-commons\1.12.8\5683b9834ddb02244076a5acc404c9aed0adf8ee\micrometer-commons-1.12.8.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-json\3.3.1\b78d1ce67c3a44e8a2c2799b70e8c216166d0f5b\spring-boot-starter-json-3.3.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.17.1\5e52a11644cd59a28ef79f02bddc2cc3bab45edb\jackson-core-2.17.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\2.17.1\969b0c3cb8c75d759e9a6c585c44c9b9f3a4f75\jackson-datatype-jsr310-2.17.1.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.apache.tomcat.embed\tomcat-embed-websocket\10.1.25\efd7848a9677e9a7cf8367b43213805eca70805\tomcat-embed-websocket-10.1.25.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-webmvc\6.1.11\9ec4c2a5e28bf7b2d60e254e976940b12c8ba32a\spring-webmvc-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.springframework\spring-web\6.1.11\8910d08f15492273543d2c8032b2b895e08ed9e\spring-web-6.1.11.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\ch.qos.logback\logback-classic\1.5.6\afc75d260d838a3bddfb8f207c2805ed7d1b34f9\logback-classic-1.5.6.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.apache.tomcat.embed\tomcat-embed-core\10.1.25\c1e5ee12f537e6b4fea2b98a7160dcf0db610561\tomcat-embed-core-10.1.25.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.junit.platform\junit-platform-engine\1.10.3\365a320c3cfd47f3346625e541e424e35dc75c42\junit-platform-engine-1.10.3.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.junit.jupiter\junit-jupiter-api\5.10.3\a22aa91d1d6c69b2020a9aeb6d095ea81132bfa5\junit-jupiter-api-5.10.3.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.junit.platform\junit-platform-commons\1.10.3\a353d42a2f13343a7cb80c5228ae66ff64495481\junit-platform-commons-1.10.3.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.opentest4j\opentest4j\1.3.0\152ea56b3a72f655d4fd677fc0ef2596c3dd5e6e\opentest4j-1.3.0.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.junit.platform\junit-platform-launcher\1.10.3\2e07e6389624f3e93fb2e87aec2fdc30cc84b069\junit-platform-launcher-1.10.3.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.apiguardian\apiguardian-api\1.1.2\a231e0d844d2721b0fa1b238006d15c6ded6842a\apiguardian-api-1.1.2.jar;c:\Users\itachi\.gradle\caches\modules-2\files-2.1\org.junit.jupiter\junit-jupiter-engine\5.10.3\48c14e866bb1a87ca35d24ff068463bb202ada24\junit-jupiter-engine-5.10.3.jar;c:\Users\itachi\AppData\Roaming\Code\User\globalStorage\redhat.java\1.32.0\config_win\org.eclipse.osgi\119\0\.cp;c:\Users\itachi\AppData\Roaming\Code\User\globalStorage\redhat.java\1.32.0\config_win\org.eclipse.osgi\54\0\.cp
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 15                                        {product} {ergonomic}
+     uint ConcGCThreads                            = 6                                         {product} {ergonomic}
+     bool EnableJVMCIProduct                       = true                                {JVMCI product} {jimage}
+     uint G1ConcRefinementThreads                  = 23                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 8388608                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 1065353216                                {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 16970153984                               {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 8388608                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 11613124                               {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 120022558                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 120022558                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool ShowCodeDetailsInExceptionMessages       = true                                   {manageable} {command line}
+   size_t SoftMaxHeapSize                          = 16970153984                            {manageable} {ergonomic}
+      int ThreadPriorityPolicy                     = 1                                         {product} {jimage}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=D:\java-sdk\22-jdk\graalvm-jdk-22.0.1+8.1
+PATH=D:\VMware\VMware Workstation\bin\;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\windows\system32\openssh\;c:\program files\nvidia corporation\nvidia nvdlisr;d:\nodejs\;d:\git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\Git\cmd;C:\Users\itachi\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\itachi\AppData\Local\Programs\Python\Python312\;C:\Users\itachi\AppData\Local\Microsoft\WindowsApps;D:\JetBrains\IntelliJ IDEA Community Edition 2023.1\bin;;C:\Users\itachi\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\itachi\AppData\Roaming\npm;D:\java-sdk\22-jdk\graalvm-jdk-22.0.1+8.1\bin;
+USERNAME=itachi
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD
+TMP=C:\Users\itachi\AppData\Local\Temp
+TEMP=C:\Users\itachi\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.3672)
+OS uptime: 0 days 22:33 hours
+Hyper-V role detected
+
+CPU: total 32 (initial active 32) (32 cores per cpu, 2 threads per core) family 25 model 97 stepping 2 microcode 0x0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4a, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, avx512f, avx512dq, avx512cd, avx512bw, avx512vl, sha, fma, vzeroupper, avx512_vpopcntdq, avx512_vpclmulqdq, avx512_vaes, avx512_vnni, clflush, clflushopt, avx512_vbmi2, avx512_vbmi, hv, rdtscp, rdpid, fsrm, gfni, avx512_bitalg, f16c, cet_ss, avx512_ifma
+Processor Information for all 32 processors :
+  Max Mhz: 4201, Current Mhz: 4201, Mhz Limit: 4201
+
+Memory: 4k page, system-wide physical 64704M (37392M free)
+TotalPageFile size 141394M (AvailPageFile size 698M)
+current process WorkingSet (physical memory assigned to process): 12M, peak: 12M
+current process commit charge ("private bytes"): 92M, peak: 1108M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (21.0.3+7-LTS-jvmci-23.1-b37) for windows-amd64 JRE (21.0.3+7-LTS-jvmci-23.1-b37), built on 2024-03-13T18:09:03Z by "Buildbot" with MS VC++ 17.6 (VS2022)
+
+END.

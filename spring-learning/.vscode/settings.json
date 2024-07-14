@@ -1,0 +1,11 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "D:\\java-sdk\\graalvm-jdk-21\\graalvm-jdk-21.0.3+7.1",
+            "default": true
+        }
+    ]
+}
