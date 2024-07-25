@@ -10,3 +10,5 @@ rootProject.name = 'spring-learning'
 include('spring-bean')
 
 include('spring-annotation')
+
+include('interceptor')
