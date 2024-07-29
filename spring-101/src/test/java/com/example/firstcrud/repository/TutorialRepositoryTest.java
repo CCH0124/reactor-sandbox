@@ -6,6 +6,7 @@ import com.example.firstcrud.domain.Tutorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -34,6 +35,7 @@ import org.testcontainers.utility.DockerImageName;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DisabledInAotMode
 @Testcontainers
+@DisplayName("Tutorial Repository")
 public class TutorialRepositoryTest {
 
   @Autowired TutorialRepository repository;
