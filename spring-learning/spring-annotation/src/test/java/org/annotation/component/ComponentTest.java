@@ -2,6 +2,8 @@ package org.annotation.component;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.annotation.component.exam1.OperatorChain;
+import org.annotation.component.exam1.OperatorConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -28,4 +30,12 @@ public class ComponentTest {
         System.out.println((repositoryTest instanceof RepositoryTest));
         ((AbstractApplicationContext) applicationContext).close();
     }    
+
+    @Test
+    public void abstract_bean_chain() {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(OperatorConfig.class);
+        OperatorChain operatorChain = applicationContext.getBean(OperatorChain.class);
+        operatorChain.process("Itachi-test");
+        ((AbstractApplicationContext) applicationContext).close();
+    }
 }
