@@ -1,18 +1,23 @@
 package org.reactor.debugging;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.reactor.debugging.model.Vehicle;
 import org.reactor.debugging.model.VehicleDto;
 import org.reactor.debugging.service.VehicleService;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.UUID;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Hooks;
 
 public class VehicleServiceTest {
 
     VehicleService service = new VehicleService();
+
+    @BeforeEach
+    void clearLogList() {
+        Hooks.onOperatorDebug();
+    }
 
     @Test
     void givenVehicle_whenProcessFoo_thenLogsWithDebugTrace() {

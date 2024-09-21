@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 @Component
 public class VehicleService {
     private static final Logger LOGGER = LoggerFactory.getLogger(VehicleService.class);
-
+    
     public void processFoo(Flux<Vehicle> flux) {
         flux.map(VehicleNameHelp::concatBrandName)
                 .map(VehicleNameHelp::substringVehicleName)

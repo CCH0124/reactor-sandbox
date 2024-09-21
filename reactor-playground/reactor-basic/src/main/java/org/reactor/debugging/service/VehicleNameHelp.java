@@ -28,7 +28,7 @@ public class VehicleNameHelp {
 
     String processedName = (random == 0)
         ? vehicle.getName().substring(2, 4)
-        : vehicle.getName().substring(0, 4);
+        : vehicle.getName().substring(0, 5);
 
     vehicle.setName(processedName);
 
