@@ -12,3 +12,5 @@ include('spring-bean')
 include('spring-annotation')
 
 include('interceptor')
+
+include('springevents')
