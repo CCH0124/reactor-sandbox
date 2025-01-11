@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
 import reactor.core.publisher.Flux;
 
 public class OperatingStream {

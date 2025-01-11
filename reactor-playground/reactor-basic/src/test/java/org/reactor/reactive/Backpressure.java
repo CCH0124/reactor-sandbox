@@ -13,7 +13,7 @@ public class Backpressure {
 
     List<String> eles = new ArrayList<>();
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
     public void test() {
         Flux.just("a", "b", "c", "d")
